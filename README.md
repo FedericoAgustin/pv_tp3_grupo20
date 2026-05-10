@@ -14,4 +14,15 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# pv_tp3_grupo20
+
+## AUTORES pv_tp3_grupo20
+
+- Salinas Federico Agustin, github: FedericoAgustin
+- Gonzalez Barrios Nehuel Agustin, github: nehuelgonzalez
+- Nicolas Joaquin Quispe, github: Nicolop745
+- Severich Bruno Damian, github: brunoseve
+- Ibañez Chicchi Joaquín Nicolás, github: joaquín-iz-n
+
+## Descripción del Proyecto
+
+Este proyecto es la migración en Vite del proyecto anteriormente presentado (TP1), se puede visualizar la sección de gestión de proyecto junto con los métodos para obetener,agregar,eliminar y buscar completamente funcionales.
