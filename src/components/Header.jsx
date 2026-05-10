@@ -1,8 +1,14 @@
 import React from 'react'
 
-const Header = () => {
+const Header = (props) => {
+    
+    let { titulo } = props.element;
+    
     return (
-        <div>Header</div>
+
+        <header>
+            <h1>{titulo}</h1>
+        </header>
     )
 }
 
