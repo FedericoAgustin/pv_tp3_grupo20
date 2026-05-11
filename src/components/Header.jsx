@@ -1,9 +1,7 @@
 import React from 'react'
 
 const Header = (props) => {
-    
     let { titulo } = props.element;
-    
     return (
 
         <header>

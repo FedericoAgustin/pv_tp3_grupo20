@@ -1,8 +1,7 @@
 import React from 'react'
 
 const Footer = (props) => {
-    let {texto}  = props.element 
-    console.log(texto);
+    let { texto } = props.element
     return (
         <footer>
             <p>{texto}</p>
