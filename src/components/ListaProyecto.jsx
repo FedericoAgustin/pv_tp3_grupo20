@@ -1,5 +1,6 @@
 import proyectoService from "../services/proyectoService";
 import React, { useState } from "react";
+import { CambiarBusqueda } from "./CambiarBusqueda";
 
 const ListaProyecto = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos(),);
@@ -9,6 +10,7 @@ const ListaProyecto = () => {
     categoriaProyecto: "",
     estadoProyecto: ""
   });
+  const[cambiarBusqueda, setCambiarBusqueda] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +28,12 @@ const ListaProyecto = () => {
   const handleBuscar = (titulo) => {
     let resultado = proyectoService.buscarProyectos(titulo);
     setProyectos(resultado);
+  };
+
+  const handleBuscar2 = (e) => {
+    let valor = e.target.value;
+    setTitulo(valor);
+    setProyectos(proyectoService.buscarProyectos(valor));
   };
 
   const handleAgregar = (e) => {
@@ -55,10 +63,11 @@ const ListaProyecto = () => {
         <section className="card">
           <h2>Lista de Proyectos Educativos</h2>
           {/* Filtro*/}
-          <div style={{ marginBottom: "20px", display: "flex", gap: "10px" }}>
-            <input type="text" className="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} placeholder="Buscar por nombre..." />
-            <button className="link" onClick={() => handleBuscar(titulo)}>Filtrar</button>
-          </div>
+
+          <button onClick={()=>{setCambiarBusqueda(cambiarBusqueda == false)}}>Cambiar Busqueda</button>
+          <CambiarBusqueda hanamichi={cambiarBusqueda} sendo = {handleBuscar} rukawa={handleBuscar2} setAkagi={setTitulo} akagi={titulo}/>
+          
+
           <div className="section-proyectos">
             {proyectos.map((p) => (
               <article key={p.id}>
