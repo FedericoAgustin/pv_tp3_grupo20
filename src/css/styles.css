@@ -196,3 +196,9 @@ footer {
         order: -1; /* El formulario sale arriba en móviles */
     }
 }
+.Detalles {
+    background-color: #036b08;
+    color: white;
+    padding: 8px 15px;
+    width: 100%;
+}

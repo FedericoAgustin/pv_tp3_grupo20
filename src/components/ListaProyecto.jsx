@@ -1,6 +1,7 @@
 import proyectoService from "../services/proyectoService";
 import React, { useState } from "react";
 import { CambiarBusqueda } from "./CambiarBusqueda";
+import { Card }  from "./Card.jsx";
 
 const ListaProyecto = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos(),);
@@ -67,21 +68,15 @@ const ListaProyecto = () => {
           <button onClick={()=>{setCambiarBusqueda(cambiarBusqueda == false)}}>Cambiar Busqueda</button>
           <CambiarBusqueda hanamichi={cambiarBusqueda} sendo = {handleBuscar} rukawa={handleBuscar2} setAkagi={setTitulo} akagi={titulo}/>
           
+          {/* <Tarjeta copiaProyectos={[...proyectos]} handleEliminar={handleEliminar} /> */}
 
-          <div className="section-proyectos">
+          < div className="section-proyectos">
             {proyectos.map((p) => (
-              <article key={p.id}>
-                <h2>{p.titulo}</h2>
-                <p className="categoria-p">
-                  <strong>Categoría:</strong> {p.categoria}
-                </p>
-                <p style={{ textAlign: "left" }}>
-                  <strong>Estado:</strong> {p.estado}
-                </p>
-                <button className="Eliminar" style={{ marginTop: "15px", cursor: "pointer" }} onClick={() => handleEliminar(p.id)}> Eliminar Proyecto </button>
-              </article>
+              <Card proyecto = {p} handleEliminar={handleEliminar} />
             ))}
           </div>
+
+
         </section>
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
         <aside className="aside-proyectos">
