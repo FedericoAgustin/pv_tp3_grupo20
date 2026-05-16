@@ -1,13 +1,17 @@
 import proyectoService from "../services/proyectoService";
 import React, { useState } from "react";
+import ProyectoCard from "./ProyectoCard.jsx";
+import DetalleProyecto from "./DetalleProyecto.jsx";
 
 const ListaProyecto = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos(),);
   const [titulo, setTitulo] = useState("");
+  const[proyectoseleccionado,setproyectoseleccionado] = useState(null);
   const [form, setForm] = useState({
     nombreProyecto: "",
     categoriaProyecto: "",
-    estadoProyecto: ""
+    estadoProyecto: "",
+    descripcionProyecto: ""
   });
 
   const handleInputChange = (e) => {
@@ -34,6 +38,7 @@ const ListaProyecto = () => {
       titulo: form.nombreProyecto,
       categoria: form.categoriaProyecto,
       estado: form.estadoProyecto,
+      descripcion: form.descripcionProyecto,
     };
     if (nuevoProyecto.titulo.trim() === "") return
 
@@ -43,10 +48,19 @@ const ListaProyecto = () => {
     setForm({
       nombreProyecto: "",
       categoriaProyecto: "",
-      estadoProyecto: ""
+      estadoProyecto: "",
+      descripcionProyecto: "",
     });
   };
 
+  const handleVerDetalle = (id) => {
+    const proyecto = proyectos.find((p) => p.id === id);
+    setproyectoseleccionado(proyecto);
+  };
+ 
+  if (proyectoseleccionado) {
+    return <DetalleProyecto proyecto={proyectoseleccionado} />;
+  }
   return (
     /* Contenedor principal que usa el layout global del CSS */
     <main className="index-page">
@@ -61,16 +75,7 @@ const ListaProyecto = () => {
           </div>
           <div className="section-proyectos">
             {proyectos.map((p) => (
-              <article key={p.id}>
-                <h2>{p.titulo}</h2>
-                <p className="categoria-p">
-                  <strong>Categoría:</strong> {p.categoria}
-                </p>
-                <p style={{ textAlign: "left" }}>
-                  <strong>Estado:</strong> {p.estado}
-                </p>
-                <button className="Eliminar" style={{ marginTop: "15px", cursor: "pointer" }} onClick={() => handleEliminar(p.id)}> Eliminar Proyecto </button>
-              </article>
+              <ProyectoCard key={p.id} proyecto={p} onVerDetalle = {handleVerDetalle} onEliminar = {handleEliminar}/>
             ))}
           </div>
         </section>
@@ -87,6 +92,15 @@ const ListaProyecto = () => {
                 <option value="Finalizado">Finalizado</option>
                 <option value="Pendiente">Pendiente</option>
               </select>
+              <textarea
+                id="descripcionProyecto"
+                name="descripcionProyecto"
+                value={form.descripcionProyecto}
+                onChange={handleInputChange}
+                placeholder="Descripción del proyecto"
+                rows={4}
+                style={{ padding: "8px", borderRadius: "5px" }}
+              />
               <button className="link" style={{ padding: "10px", borderRadius: "5px", marginTop: "10px", }} type="submit">Agregar Proyecto</button>
             </div>
           </form>
