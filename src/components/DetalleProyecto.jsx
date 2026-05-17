@@ -12,6 +12,12 @@ const DetalleProyecto = ({ proyecto, cambio, setMostrarFooter }) => {
       <p><strong>Rol:</strong> {rol}</p>
       <h3>Descripcion</h3>
       <p>{descripcion}</p>
+      <h3>Recursos</h3>
+      <ul className="link-recursos">
+          <li><a href="#">Guía en PDF</a></li>
+          <li><a href="#">Carpeta en Google Drive</a></li>
+          <li><a href="#">Repositorio en GitHub</a></li>
+      </ul>
     </div>
   );
 };
