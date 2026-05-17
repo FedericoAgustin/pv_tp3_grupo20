@@ -2,8 +2,9 @@ import proyectoService from "../services/proyectoService";
 import React, { useState } from "react";
 import ProyectoCard from "./ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
+import { CambiarBusqueda } from "./CambiarBusqueda";
 
-const ListaProyecto = () => {
+const ListaProyecto = ({ setMostrarFooter }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos(),);
   const [titulo, setTitulo] = useState("");
   const[proyectoseleccionado,setproyectoseleccionado] = useState(null);
@@ -13,6 +14,7 @@ const ListaProyecto = () => {
     estadoProyecto: "",
     descripcionProyecto: ""
   });
+  const[cambiarBusqueda, setCambiarBusqueda] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +32,12 @@ const ListaProyecto = () => {
   const handleBuscar = (titulo) => {
     let resultado = proyectoService.buscarProyectos(titulo);
     setProyectos(resultado);
+  };
+
+  const handleBuscar2 = (e) => {
+    let valor = e.target.value;
+    setTitulo(valor);
+    setProyectos(proyectoService.buscarProyectos(valor));
   };
 
   const handleAgregar = (e) => {
@@ -56,10 +64,11 @@ const ListaProyecto = () => {
   const handleVerDetalle = (id) => {
     const proyecto = proyectos.find((p) => p.id === id);
     setproyectoseleccionado(proyecto);
+    setMostrarFooter(false);
   };
  
   if (proyectoseleccionado) {
-    return <DetalleProyecto proyecto={proyectoseleccionado} />;
+    return <DetalleProyecto proyecto={proyectoseleccionado} cambio={setproyectoseleccionado} setMostrarFooter={setMostrarFooter}/>
   }
   return (
     /* Contenedor principal que usa el layout global del CSS */
@@ -69,15 +78,16 @@ const ListaProyecto = () => {
         <section className="card">
           <h2>Lista de Proyectos Educativos</h2>
           {/* Filtro*/}
-          <div style={{ marginBottom: "20px", display: "flex", gap: "10px" }}>
-            <input type="text" className="titulo" value={titulo} onChange={(e) => setTitulo(e.target.value)} placeholder="Buscar por nombre..." />
-            <button className="link" onClick={() => handleBuscar(titulo)}>Filtrar</button>
-          </div>
+
+          <button onClick={()=>{setCambiarBusqueda(cambiarBusqueda == false)}}>Cambiar Busqueda</button>
+          <CambiarBusqueda hanamichi={cambiarBusqueda} sendo = {handleBuscar} rukawa={handleBuscar2} setAkagi={setTitulo} akagi={titulo}/>
+
           <div className="section-proyectos">
             {proyectos.map((p) => (
-              <ProyectoCard key={p.id} proyecto={p} onVerDetalle = {handleVerDetalle} onEliminar = {handleEliminar}/>
+              <ProyectoCard key={p.id} proyecto={p} verDetalle = {handleVerDetalle} handleEliminar = {handleEliminar}/>
             ))}
           </div>
+
         </section>
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
         <aside className="aside-proyectos">
