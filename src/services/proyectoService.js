@@ -41,17 +41,17 @@ const descripcionArreglo=[
 const proyectoService = (() => {
 
     let proyectos = [
-        { id: 1, titulo: 'Capacitación de Docentes', categoria: 'web', estado: 'En curso', imagen: imagenDocentes, descripcion:descripcionArreglo[0]},
-        { id: 2, titulo: 'Biblioteca Digital', categoria: 'web', estado: 'Completado', imagen: imagenBiblioteca,descripcion:descripcionArreglo[1]},
-        { id: 3, titulo: 'Olimpiadas académicas', categoria: 'mobile', estado: 'En curso', imagen: imagenOlimpiadas,descripcion:descripcionArreglo[2]},
-        { id: 4, titulo: 'Orientación Vocacional', categoria: 'web', estado: 'Pendiente', imagen: imagenOrientacion, descripcion:descripcionArreglo[3] },
-        { id: 5, titulo: 'Tutoring Académico', categoria: 'mobile', estado: 'En curso', imagen: imagenCursos,descripcion:descripcionArreglo[4] },
+        { id: 1, titulo: 'Capacitación de Docentes', categoria: 'web', estado: 'En curso', imagen: imagenDocentes, equipo: 'Juan Pérez', rol: 'Director Principal',descripcion:descripcionArreglo[0]},
+        { id: 2, titulo: 'Biblioteca Digital', categoria: 'web', estado: 'Completado', imagen: imagenBiblioteca, equipo: 'Ana Martínez', rol: 'Coordinadora Secundario',descripcion:descripcionArreglo[1]},
+        { id: 3, titulo: 'Olimpiadas académicas', categoria: 'mobile', estado: 'En curso', imagen: imagenOlimpiadas, equipo: 'Sofía López', rol: 'Rectora',descripcion:descripcionArreglo[2]},
+        { id: 4, titulo: 'Orientación Vocacional', categoria: 'web', estado: 'Pendiente', imagen: imagenOrientacion, equipo: 'Elena Torres', rol: 'Administrativa', descripcion:descripcionArreglo[3]},
+        { id: 5, titulo: 'Tutoring Académico', categoria: 'mobile', estado: 'En curso', imagen: imagenCursos, equipo: 'Miguel Herrera', rol: 'Académico',descripcion:descripcionArreglo[4]},
     ];
 
     const obtenerProyectos = () => [...proyectos];
 
     const agregarProyecto = (proyecto) => {
-        const nuevoProyecto = { id: proyectos.length + 1, ...proyecto, imagen: imagenDefault};
+        const nuevoProyecto = { id: proyectos.length + 1, ...proyecto, imagen: imagenDefault };
         proyectos.push(nuevoProyecto);
     }
 
