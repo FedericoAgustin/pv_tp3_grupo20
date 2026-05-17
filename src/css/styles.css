@@ -216,6 +216,12 @@ footer {
     object-fit: contain;
 }
 
+.card p {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: normal;
+}
+
 .link-recursos {
   list-style: none;
   padding: 0;
@@ -234,4 +240,3 @@ footer {
 
 .link-recursos a:hover {
   color: #3498db;
-}
