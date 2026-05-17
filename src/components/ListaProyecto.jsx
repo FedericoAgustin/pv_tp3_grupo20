@@ -109,7 +109,7 @@ const ListaProyecto = ({ setMostrarFooter }) => {
                 <option value="Finalizado">Finalizado</option>
                 <option value="Pendiente">Pendiente</option>
               </select>
-              <textarea id="descripcionProyecto" name="descripcionProyecto" value={form.descripcionProyecto} onChange={handleInputChange} placeholder="Descripción del proyecto" rows={4} style={{ padding: "8px", borderRadius: "5px" }} />
+              <textarea id="descripcionProyecto" name="descripcionProyecto" value={form.descripcionProyecto} onChange={handleInputChange} placeholder="Descripción del proyecto" rows={4}/>
               <button className="link" style={{ padding: "10px", borderRadius: "5px", marginTop: "10px", }} type="submit">Agregar Proyecto</button>
             </div>
           </form>
