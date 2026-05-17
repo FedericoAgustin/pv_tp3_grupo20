@@ -7,14 +7,16 @@ import { CambiarBusqueda } from "./CambiarBusqueda";
 const ListaProyecto = ({ setMostrarFooter }) => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos(),);
   const [titulo, setTitulo] = useState("");
-  const[proyectoseleccionado,setproyectoseleccionado] = useState(null);
+  const [proyectoseleccionado, setproyectoseleccionado] = useState(null);
   const [form, setForm] = useState({
     nombreProyecto: "",
     categoriaProyecto: "",
     estadoProyecto: "",
-    descripcionProyecto: ""
+    descripcionProyecto: "",
+    equipoProyecto: "",
+    rolProyecto: "",
   });
-  const[cambiarBusqueda, setCambiarBusqueda] = useState(false);
+  const [cambiarBusqueda, setCambiarBusqueda] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +49,8 @@ const ListaProyecto = ({ setMostrarFooter }) => {
       categoria: form.categoriaProyecto,
       estado: form.estadoProyecto,
       descripcion: form.descripcionProyecto,
+      equipo: form.equipoProyecto,
+      rol: form.rolProyecto,
     };
     if (nuevoProyecto.titulo.trim() === "") return
 
@@ -58,6 +62,8 @@ const ListaProyecto = ({ setMostrarFooter }) => {
       categoriaProyecto: "",
       estadoProyecto: "",
       descripcionProyecto: "",
+      equipoProyecto: "",
+      rolProyecto: "",
     });
   };
 
@@ -66,9 +72,9 @@ const ListaProyecto = ({ setMostrarFooter }) => {
     setproyectoseleccionado(proyecto);
     setMostrarFooter(false);
   };
- 
+
   if (proyectoseleccionado) {
-    return <DetalleProyecto proyecto={proyectoseleccionado} cambio={setproyectoseleccionado} setMostrarFooter={setMostrarFooter}/>
+    return <DetalleProyecto proyecto={proyectoseleccionado} cambio={setproyectoseleccionado} setMostrarFooter={setMostrarFooter} />
   }
   return (
     /* Contenedor principal que usa el layout global del CSS */
@@ -79,12 +85,11 @@ const ListaProyecto = ({ setMostrarFooter }) => {
           <h2>Lista de Proyectos Educativos</h2>
           {/* Filtro*/}
 
-          <button onClick={()=>{setCambiarBusqueda(cambiarBusqueda == false)}}>Cambiar Busqueda</button>
-          <CambiarBusqueda hanamichi={cambiarBusqueda} sendo = {handleBuscar} rukawa={handleBuscar2} setAkagi={setTitulo} akagi={titulo}/>
-
+          <button onClick={() => { setCambiarBusqueda(cambiarBusqueda == false) }}>Cambiar Busqueda</button>
+          <CambiarBusqueda cambiarBusqueda={cambiarBusqueda} handleBuscar={handleBuscar} handleBuscar2={handleBuscar2} setTitulo={setTitulo} titulo={titulo} />
           <div className="section-proyectos">
             {proyectos.map((p) => (
-              <ProyectoCard key={p.id} proyecto={p} verDetalle = {handleVerDetalle} handleEliminar = {handleEliminar}/>
+              <ProyectoCard key={p.id} proyecto={p} verDetalle={handleVerDetalle} handleEliminar={handleEliminar} />
             ))}
           </div>
 
@@ -96,21 +101,15 @@ const ListaProyecto = ({ setMostrarFooter }) => {
             <div className="form">
               <input type="text" id="nombreProyecto" name="nombreProyecto" value={form.nombreProyecto} onChange={(e) => handleInputChange(e)} placeholder="Nombre del proyecto" />
               <input type="text" id="categoriaProyecto" name="categoriaProyecto" value={form.categoriaProyecto} onChange={(e) => handleInputChange(e)} placeholder="Categoría" />
+              <input type="text" id="equipoProyecto" name="equipoProyecto" value={form.equipoProyecto} onChange={(e) => handleInputChange(e)} placeholder="Equipo a cargo" />
+              <input type="text" id="rolProyecto" name="rolProyecto" value={form.rolProyecto} onChange={(e) => handleInputChange(e)} placeholder="Rol" />
               <select id="estadoProyecto" name="estadoProyecto" value={form.estadoProyecto} onChange={(e) => handleInputChange(e)}>
                 <option value="">Selecciona un estado</option>
                 <option value="En curso">En curso</option>
                 <option value="Finalizado">Finalizado</option>
                 <option value="Pendiente">Pendiente</option>
               </select>
-              <textarea
-                id="descripcionProyecto"
-                name="descripcionProyecto"
-                value={form.descripcionProyecto}
-                onChange={handleInputChange}
-                placeholder="Descripción del proyecto"
-                rows={4}
-                style={{ padding: "8px", borderRadius: "5px" }}
-              />
+              <textarea id="descripcionProyecto" name="descripcionProyecto" value={form.descripcionProyecto} onChange={handleInputChange} placeholder="Descripción del proyecto" rows={4} style={{ padding: "8px", borderRadius: "5px" }} />
               <button className="link" style={{ padding: "10px", borderRadius: "5px", marginTop: "10px", }} type="submit">Agregar Proyecto</button>
             </div>
           </form>
