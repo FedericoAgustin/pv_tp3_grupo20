@@ -109,7 +109,6 @@ const ListaProyecto = ({ setMostrarFooter }) => {
                 onChange={handleInputChange}
                 placeholder="Descripción del proyecto"
                 rows={4}
-                style={{ padding: "8px", borderRadius: "5px" }}
               />
               <button className="link" style={{ padding: "10px", borderRadius: "5px", marginTop: "10px", }} type="submit">Agregar Proyecto</button>
             </div>
