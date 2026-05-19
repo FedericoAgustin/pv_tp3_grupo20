@@ -159,6 +159,12 @@ button {
     background-color: #7a2c2c;
 }
 
+.caja-boton{
+display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
 /*------ NAVBAR (Opcional) --------- */
 nav {
     background-color: var(--color-primario);
@@ -241,3 +247,5 @@ footer {
 .link-recursos a:hover {
   color: #3498db;
 }
+
+
