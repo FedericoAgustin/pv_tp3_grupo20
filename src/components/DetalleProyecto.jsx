@@ -3,7 +3,7 @@ const DetalleProyecto = ({ proyecto, cambio, setMostrarFooter }) => {
 
   return (
     <div className="card" style={{ marginTop: "20px" }}>
-      <button onClick={() => { cambio(null), setMostrarFooter(true) }}>regresar</button>
+      <button  onClick={() => { cambio(null), setMostrarFooter(true) }} >regresar</button>
       <h2>{titulo}</h2>
       <img src={proyecto.imagen} alt={titulo} style={{ width: "30%", height: "auto", borderRadius: "5px" }} />
       <p><strong>Categoría:</strong> {categoria}</p>
