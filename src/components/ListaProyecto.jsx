@@ -1,5 +1,5 @@
 import proyectoService from "../services/proyectoService";
-import  { useState } from "react";
+import { useEffect, useState } from "react";
 import ProyectoCard from "./ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
 import { CambiarBusqueda } from "./CambiarBusqueda";
@@ -10,6 +10,13 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   const [titulo, setTitulo] = useState("");
   const [proyectoseleccionado, setproyectoseleccionado] = useState(null);
   const [cambiarBusqueda, setCambiarBusqueda] = useState(false);
+  const [fecha, setFecha] = useState("");
+
+  useEffect(() => {
+    console.log("entre a useEffect");
+    const fechaFormateada = new Date();
+    setFecha(fechaFormateada);
+  }, [proyectos]);
 
   const handleEliminar = (id) => {
     proyectoService.eliminarProyecto(id);
@@ -71,7 +78,7 @@ const ListaProyecto = ({ setMostrarFooter }) => {
         </section>
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
         <aside className="aside-proyectos">
-         <FormularioProyecto handleAgregar={handleAgregar}/>
+          <FormularioProyecto handleAgregar={handleAgregar} />
         </aside>
       </div>
     </main>
