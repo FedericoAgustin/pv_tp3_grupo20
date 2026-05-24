@@ -16,13 +16,22 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   const omitirPrimero = useRef(0)
   const busquedaRef = useRef(false);
 
+  const formatoFecha=(fechaActual)=>{
+    const dia = String(fechaActual.getDate()).padStart(2, "0");
+    const mes = String(fechaActual.getMonth() + 1).padStart(2, "0");
+    const anio = fechaActual.getFullYear();
+    const horas = String(fechaActual.getHours()).padStart(2, "0");
+    const minutos = String(fechaActual.getMinutes()).padStart(2, "0");
+    const resultado = `${dia}/${mes}/${anio} a las ${horas}:${minutos} hs.`;
+    return resultado;
+  }
 
   useEffect(() => {
     if (omitirPrimero.current < 2) {
       omitirPrimero.current += 1;
     } else {
       if (busquedaRef.current == false) {
-        const fechaFormateada = new Date().toLocaleString("es-AR");
+        const fechaFormateada = formatoFecha(new Date());
         setFecha(fechaFormateada);
       } else {
         busquedaRef.current = false;
