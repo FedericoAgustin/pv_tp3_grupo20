@@ -4,6 +4,7 @@ import ProyectoCard from "./ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
 import { CambiarBusqueda } from "./CambiarBusqueda";
 import FormularioProyecto from "./FormularioProyecto.jsx";
+import RegistroActividad from "./RegistroActividad.jsx";
 
 const ListaProyecto = ({ setMostrarFooter }) => {
   const [proyectos, setProyectos] = useState(
@@ -16,7 +17,7 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   const omitirPrimero = useRef(0)
   const busquedaRef = useRef(false);
 
-  const formatoFecha=(fechaActual)=>{
+  const formatoFecha = (fechaActual) => {
     const dia = String(fechaActual.getDate()).padStart(2, "0");
     const mes = String(fechaActual.getMonth() + 1).padStart(2, "0");
     const anio = fechaActual.getFullYear();
@@ -120,7 +121,7 @@ const ListaProyecto = ({ setMostrarFooter }) => {
               />
             ))}
           </div>
-           {fecha}
+          {fecha && <RegistroActividad fecha={fecha} />}
         </section>
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
         <aside className="aside-proyectos">
