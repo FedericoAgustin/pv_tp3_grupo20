@@ -47,12 +47,14 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   const handleBuscar = (titulo) => {
     let resultado = proyectoService.buscarProyectos(titulo);
     setProyectos(resultado);
+    busquedaRef.current = true;
   };
 
   const handleBuscar2 = (e) => {
     let valor = e.target.value;
     setTitulo(valor);
     setProyectos(proyectoService.buscarProyectos(valor));
+    busquedaRef.current = true;
   };
 
   const handleAgregar = (form) => {
