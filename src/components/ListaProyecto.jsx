@@ -1,21 +1,33 @@
 import proyectoService from "../services/proyectoService";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ProyectoCard from "./ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
 import { CambiarBusqueda } from "./CambiarBusqueda";
 import FormularioProyecto from "./FormularioProyecto.jsx";
 
 const ListaProyecto = ({ setMostrarFooter }) => {
-  const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos(),);
+  const [proyectos, setProyectos] = useState(
+    proyectoService.obtenerProyectos(),
+  );
   const [titulo, setTitulo] = useState("");
   const [proyectoseleccionado, setproyectoseleccionado] = useState(null);
   const [cambiarBusqueda, setCambiarBusqueda] = useState(false);
   const [fecha, setFecha] = useState("");
+  const omitirPrimero = useRef(0)
+  const busquedaRef = useRef(false);
+
 
   useEffect(() => {
-    console.log("entre a useEffect");
-    const fechaFormateada = new Date();
-    setFecha(fechaFormateada);
+    if (omitirPrimero.current < 2) {
+      omitirPrimero.current += 1;
+    } else {
+      if (busquedaRef.current == false) {
+        const fechaFormateada = new Date().toLocaleString("es-AR");
+        setFecha(fechaFormateada);
+      } else {
+        busquedaRef.current = false;
+      }
+    }
   }, [proyectos]);
 
   const handleEliminar = (id) => {
@@ -43,7 +55,7 @@ const ListaProyecto = ({ setMostrarFooter }) => {
       equipo: form.equipoProyecto,
       rol: form.rolProyecto,
     };
-    if (nuevoProyecto.titulo.trim() === "") return
+    if (nuevoProyecto.titulo.trim() === "") return;
 
     proyectoService.agregarProyecto(nuevoProyecto);
     setProyectos(proyectoService.obtenerProyectos());
@@ -56,7 +68,13 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   };
 
   if (proyectoseleccionado) {
-    return <DetalleProyecto proyecto={proyectoseleccionado} cambio={setproyectoseleccionado} setMostrarFooter={setMostrarFooter} />
+    return (
+      <DetalleProyecto
+        proyecto={proyectoseleccionado}
+        cambio={setproyectoseleccionado}
+        setMostrarFooter={setMostrarFooter}
+      />
+    );
   }
   return (
     /* Contenedor principal que usa el layout global del CSS */
@@ -67,14 +85,31 @@ const ListaProyecto = ({ setMostrarFooter }) => {
           <h2>Lista de Proyectos Educativos</h2>
           {/* Filtro*/}
 
-          <button onClick={() => { setCambiarBusqueda(cambiarBusqueda == false) }}>Cambiar Busqueda</button>
-          <CambiarBusqueda cambiarBusqueda={cambiarBusqueda} handleBuscar={handleBuscar} handleBuscar2={handleBuscar2} setTitulo={setTitulo} titulo={titulo} />
+          <button
+            onClick={() => {
+              setCambiarBusqueda(cambiarBusqueda == false);
+            }}
+          >
+            Cambiar Busqueda
+          </button>
+          <CambiarBusqueda
+            cambiarBusqueda={cambiarBusqueda}
+            handleBuscar={handleBuscar}
+            handleBuscar2={handleBuscar2}
+            setTitulo={setTitulo}
+            titulo={titulo}
+          />
           <div className="section-proyectos">
             {proyectos.map((p) => (
-              <ProyectoCard key={p.id} proyecto={p} verDetalle={handleVerDetalle} handleEliminar={handleEliminar} />
+              <ProyectoCard
+                key={p.id}
+                proyecto={p}
+                verDetalle={handleVerDetalle}
+                handleEliminar={handleEliminar}
+              />
             ))}
           </div>
-
+           {fecha}
         </section>
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
         <aside className="aside-proyectos">
