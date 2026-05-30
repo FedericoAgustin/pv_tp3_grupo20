@@ -1,6 +1,6 @@
 import Nav from './components/Nav'
 import Footer from './components/Footer'
-import ListaProyectos from './components/ListaProyecto'
+import ListaProyectos from './views/ListaProyecto'
 import "./static/css/styles.css"
 import Header from './components/Header'
 import { useState } from 'react';

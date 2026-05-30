@@ -6,7 +6,6 @@ const Footer = (props) => {
         <footer>
             <p>{texto}</p>
         </footer>
-
     )
 }
 

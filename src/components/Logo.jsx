@@ -4,7 +4,6 @@ const Logo = () => {
   return (
     <div>
         <img className="logo-img" src={logo} alt="Logo" />
-
     </div>
   )
 }

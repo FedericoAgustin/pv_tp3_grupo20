@@ -1,10 +1,10 @@
-import proyectoService from "../services/proyectoService";
+import proyectoService from "../services/proyectoService.js";
 import { useEffect, useState, useRef } from "react";
-import ProyectoCard from "./ProyectoCard.jsx";
+import ProyectoCard from "../components/ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
-import { CambiarBusqueda } from "./CambiarBusqueda";
-import FormularioProyecto from "./FormularioProyecto.jsx";
-import RegistroActividad from "./RegistroActividad.jsx";
+import { CambiarBusqueda } from "../components/CambiarBusqueda.jsx";
+import FormularioProyecto from "../components/FormularioProyecto.jsx";
+import RegistroActividad from "../components/RegistroActividad.jsx";
 
 const ListaProyecto = ({ setMostrarFooter }) => {
   const [proyectos, setProyectos] = useState(
