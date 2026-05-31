@@ -5,6 +5,7 @@ import DetalleProyecto from "./DetalleProyecto.jsx";
 import { CambiarBusqueda } from "../components/CambiarBusqueda.jsx";
 import FormularioProyecto from "../components/FormularioProyecto.jsx";
 import RegistroActividad from "../components/RegistroActividad.jsx";
+import { Container,Row, Col } from "react-bootstrap";
 
 const ListaProyecto = ({ setMostrarFooter }) => {
   const [proyectos, setProyectos] = useState(
@@ -90,44 +91,57 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   }
   return (
     /* Contenedor principal que usa el layout global del CSS */
+
+
+        /* se saco el display del dashboard de style.css porque estorbaba xd */
+
     <main className="index-page">
+      <Container>
       <div className="dashboard">
         {/*LISTADO */}
-        <section className="card">
-          <h2>Lista de Proyectos Educativos</h2>
-          {/* Filtro*/}
+        <Row>
+          <Col md={8}>
+          <section className="card">
+            <h2>Lista de Proyectos Educativos</h2>
+            {/* Filtro*/}
 
-          <button
-            onClick={() => {
-              setCambiarBusqueda(cambiarBusqueda == false);
-            }}
-          >
-            Cambiar Busqueda
-          </button>
-          <CambiarBusqueda
-            cambiarBusqueda={cambiarBusqueda}
-            handleBuscar={handleBuscar}
-            handleBuscar2={handleBuscar2}
-            setTitulo={setTitulo}
-            titulo={titulo}
-          />
-          <div className="section-proyectos">
-            {proyectos.map((p) => (
-              <ProyectoCard
-                key={p.id}
-                proyecto={p}
-                verDetalle={handleVerDetalle}
-                handleEliminar={handleEliminar}
-              />
-            ))}
-          </div>
-          {fecha && <RegistroActividad fecha={fecha} />}
-        </section>
+            <button
+              onClick={() => {
+                setCambiarBusqueda(cambiarBusqueda == false);
+              }}
+            >
+              Cambiar Busqueda
+            </button>
+            <CambiarBusqueda
+              cambiarBusqueda={cambiarBusqueda}
+              handleBuscar={handleBuscar}
+              handleBuscar2={handleBuscar2}
+              setTitulo={setTitulo}
+              titulo={titulo}
+            />
+            <div className="section-proyectos">
+              {proyectos.map((p) => (
+                <ProyectoCard
+                  key={p.id}
+                  proyecto={p}
+                  verDetalle={handleVerDetalle}
+                  handleEliminar={handleEliminar}
+                />
+              ))}
+            </div>
+            {fecha && <RegistroActividad fecha={fecha} />}
+          </section>
+          </Col>
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
-        <aside className="aside-proyectos">
-          <FormularioProyecto handleAgregar={handleAgregar} />
-        </aside>
+          <Col md={4}>
+          <aside className="aside-proyectos">
+            <FormularioProyecto handleAgregar={handleAgregar} />
+          </aside>
+          </Col>
+        </Row>
       </div>
+      </Container>
+
     </main>
   );
 };
