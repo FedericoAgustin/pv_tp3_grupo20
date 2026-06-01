@@ -1,11 +1,13 @@
-import React from 'react'
+import {Image} from "react-bootstrap";
 
 export const ImagenProyecto = ({ imagen, titulo }) => {
+
   return (
-    <img className="imagen-proyecto"
+    <Image className="imagen-proyecto"
       src={imagen}
       alt={titulo}
       className="imagen-proyecto"
     />
   )
+  
 }
