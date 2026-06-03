@@ -12,7 +12,6 @@ const ListaProyecto = ({ setMostrarFooter }) => {
     proyectoService.obtenerProyectos(),
   );
   const [titulo, setTitulo] = useState("");
-  const [proyectoseleccionado, setproyectoseleccionado] = useState(null);
   const [cambiarBusqueda, setCambiarBusqueda] = useState(false);
   const [fecha, setFecha] = useState("");
   const omitirPrimero = useRef(0)
@@ -74,21 +73,6 @@ const ListaProyecto = ({ setMostrarFooter }) => {
     setProyectos(proyectoService.obtenerProyectos());
   };
 
-  const handleVerDetalle = (id) => {
-    const proyecto = proyectos.find((p) => p.id === id);
-    setproyectoseleccionado(proyecto);
-    setMostrarFooter(false);
-  };
-
-  if (proyectoseleccionado) {
-    return (
-      <DetalleProyecto
-        proyecto={proyectoseleccionado}
-        cambio={setproyectoseleccionado}
-        setMostrarFooter={setMostrarFooter}
-      />
-    );
-  }
   return (
     /* Contenedor principal que usa el layout global del CSS */
 
@@ -124,7 +108,6 @@ const ListaProyecto = ({ setMostrarFooter }) => {
                 <ProyectoCard
                   key={p.id}
                   proyecto={p}
-                  verDetalle={handleVerDetalle}
                   handleEliminar={handleEliminar}
                 />
               ))}
