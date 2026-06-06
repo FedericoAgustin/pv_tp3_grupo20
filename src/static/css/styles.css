@@ -269,6 +269,9 @@ footer {
 .link-recursos {
     list-style: none;
     padding: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
 }
 
 .link-recursos li {

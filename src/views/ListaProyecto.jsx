@@ -74,11 +74,6 @@ const ListaProyecto = ({ setMostrarFooter }) => {
   };
 
   return (
-    /* Contenedor principal que usa el layout global del CSS */
-
-
-        /* se saco el display del dashboard de style.css porque estorbaba xd */
-
     <main className="index-page">
       <Container>
       <div className="dashboard">

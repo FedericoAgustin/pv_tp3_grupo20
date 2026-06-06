@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import proyectoService from '../services/proyectoService.js';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Button, Row,Col, Card } from 'react-bootstrap';
 
 const DetalleProyecto = () => {
   const { id } = useParams();
@@ -10,26 +10,30 @@ const DetalleProyecto = () => {
 
   return (
     <>
-      <Button as={Link} to="/proyectos" variant="danger" className="flex-fill">regresar</Button>
-      {
-        proyecto ? (
-          <div className="card" style={{ marginTop: "20px" }}>
-            <h2>{titulo}</h2>
-            <img className="mx-auto d-block" src={proyecto.imagen} alt={titulo} style={{ width: "50%", height: "auto", borderRadius: "5px" }} />
-            <p><strong>Categoría:</strong> {categoria}</p>
-            <p><strong>Estado:</strong> {estado}</p>
-            <p><strong>Equipo:</strong> {equipo}</p>
-            <p><strong>Rol:</strong> {rol}</p>
+    <Button as={Link} to="/proyectos" variant="danger" className="flex-fill">regresar</Button>
+    {
+      proyecto ? (
+        <div className="card" style={{ marginTop: "20px" }}>
+          <h2>{titulo}</h2>
+          <Row>
+            <Col md={5}>
+              <Card.Img variant="top" src={proyecto.imagen} alt={titulo} style={{ height: "220px", objectFit: "cover" }} />
+              <p><strong>Categoría:</strong> {categoria}</p>
+              <p><strong>Estado:</strong> {estado}</p>
+              <p><strong>Equipo:</strong> {equipo}</p>
+              <p><strong>Rol:</strong> {rol}</p>
+            </Col>
+            <Col md={7}>
             <h3>Descripcion</h3>
-            <p>{descripcion}</p>
-            <h3>Recursos</h3>
-            <ul className="link-recursos">
+          <p>{descripcion}</p>
+            </Col>
+          </Row>
+          <ul className="link-recursos">
               <li><a href="#">Guía en PDF</a></li>
               <li><a href="#">Carpeta en Google Drive</a></li>
               <li><a href="#">Repositorio en GitHub</a></li>
-            </ul>
-          </div>
-
+          </ul>
+        </div>
         )
           :
           (
