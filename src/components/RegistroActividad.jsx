@@ -1,11 +1,11 @@
 import React from 'react'
-
+import {Alert} from 'react-bootstrap'
 const RegistroActividad = ({ fecha }) => {
 
   return (
-    <div>
-      <p><strong>Última actualización de la lista:</strong> {fecha} <br /> </p>
-    </div>
+    <Alert variant='ligth'>
+      <strong>Última actualización de la lista:</strong> {fecha}
+    </Alert>
   )
 }
 export default RegistroActividad;
