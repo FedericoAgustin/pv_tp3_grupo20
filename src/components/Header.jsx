@@ -4,9 +4,9 @@ import Logo from './Logo.jsx';
 const Header = (props) => {
     let { titulo } = props.element;
     return (
-        <header style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "10px" }}>
+        <header classname="d-flex align-items-center justify-content-center gap-2 py-3">
             <Logo />
-            <h1>{titulo}</h1>
+            <h1 className="mb-0">{titulo}</h1>
         </header>
     )
 }
