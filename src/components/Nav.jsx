@@ -9,13 +9,13 @@ const Nav = () => {
   <Navbar.Collapse id="basic-navbar-nav">
     <ul className="navbar-nav mx-auto justify-content-center">
       <li className="nav-item">
-        <Link className="nav-link" to="/">Inicio</Link>
+        <Link className="nav-link text-white" to="/"><strong>Inicio</strong></Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/proyectos">Proyectos</Link>
+        <Link className="nav-link text-white" to="/proyectos"><strong>Proyectos</strong></Link>
       </li>
       <li className="nav-item">
-        <Link className="nav-link" to="/perfil">Perfil</Link>
+        <Link className="nav-link text-white" to="/perfil"><strong>Perfil</strong></Link>
       </li>
     </ul>
   </Navbar.Collapse>
