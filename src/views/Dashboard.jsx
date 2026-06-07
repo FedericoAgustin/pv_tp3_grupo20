@@ -1,4 +1,4 @@
-import { Card, Col, Container, Row, Carousel, Badge } from "react-bootstrap";
+import { Card, Col, Container, Row, Carousel, Badge, Image } from "react-bootstrap";
 import proyectoService from "../services/proyectoService";
 import { useEffect, useState } from "react";
 
@@ -14,10 +14,7 @@ const Dashboard = () => {
               <h1 style={{ fontSize: "1.4rem", color: "#2B231E" }}>
                 Bienvenido a la Plataforma de Gestión de Proyectos Educativos
               </h1>
-              <p
-                className="mt-3"
-                style={{ fontSize: "0.95rem", lineHeight: "1.6" }}
-              >
+              <p className="mt-3" style={{ fontSize: "0.95rem", lineHeight: "1.6" }}              >
                 Desde esta pagina podés gestionar, visualizar y hacer
                 seguimiento de todos los proyectos educativos de la institución.
                 Esta plataforma permite agregar nuevos proyectos, consultar su
@@ -39,6 +36,7 @@ const Dashboard = () => {
               <Carousel interval={2000} indicators={true}>
                 {proyectos.map((proyecto) => (
                   <Carousel.Item key={proyecto.id}>
+                    <Image src={proyecto.imagen} alt={proyecto.titulo} />
                     <div className="d-flex justify-content-center align-items-center" style={{ height: "200px", padding: "2rem" }}>
                       <div className="text-center" style={{ color: "#2B231E" }}>
                         <h4 style={{ fontWeight: "bold" }}>{proyecto.titulo}</h4>
