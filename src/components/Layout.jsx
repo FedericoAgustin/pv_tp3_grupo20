@@ -7,15 +7,16 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Rutas from "./Rutas";
 import { Outlet } from "react-router-dom";
-
+import {UsuarioProvider} from '../context/UsuarioContext';
 const Layout = ({ mostrarFooter }) => {
   
   return (
+    <UsuarioProvider>
     <div>
       <Header element={{ titulo: "Gestión de Proyectos Educativos" }} />
       <Nav />
       <Outlet />
-      {mostrarFooter && (
+      {mostrarFooter && ( 
         <Footer
           element={{
             texto: "Plataforma de Gestión de Proyectos Educativos 2026",
@@ -23,6 +24,7 @@ const Layout = ({ mostrarFooter }) => {
         />
       )}
     </div>
+    </UsuarioProvider>
   );
 };
 
