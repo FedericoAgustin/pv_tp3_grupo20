@@ -9,7 +9,7 @@ export const UsuarioProvider=({ children }) => {
             nombre: "Lopez Aguila",
             dni: "11111111",
             rol: "Docente",
-            intitucion: "Universidad Nacional de Jujuy"
+            institucion: "Universidad Nacional de Jujuy"
         }
 
 
