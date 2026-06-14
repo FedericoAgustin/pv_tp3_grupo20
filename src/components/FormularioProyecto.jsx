@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-const FormularioProyecto = ({ handleAgregar }) => {
+import  proyectoService  from "../services/proyectoService";
+const FormularioProyecto = ({ handleAgregar, setProyectos }) => {
     const [form, setForm] = useState({
         nombreProyecto: "",
         categoriaProyecto: "",
@@ -67,6 +68,10 @@ const FormularioProyecto = ({ handleAgregar }) => {
                     <Form.Control as="textarea" id="descripcionProyecto" name="descripcionProyecto" value={form.descripcionProyecto} onChange={handleInputChange} placeholder="Descripción del proyecto" rows={4} required   />
                 </Form.Group>
                 <Button variant="dark" type="submit"> Agregar proyecto</Button>
+                <Button onClick={()=>{
+                    proyectoService.listarProyectosOriginales();
+                    setProyectos(proyectoService.obtenerProyectos());
+                }} variant="secondary" className="ms-2"> Listar proyectos originales</Button>
             </Form>
         </div>
     );

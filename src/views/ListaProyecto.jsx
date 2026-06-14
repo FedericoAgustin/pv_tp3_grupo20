@@ -7,7 +7,7 @@ import FormularioProyecto from "../components/FormularioProyecto.jsx";
 import RegistroActividad from "../components/RegistroActividad.jsx";
 import { Container,Row, Col } from "react-bootstrap";
 
-const ListaProyecto = ({ setMostrarFooter }) => {
+const ListaProyecto = () => {
   const [proyectos, setProyectos] = useState(
     proyectoService.obtenerProyectos(),
   );
@@ -113,7 +113,7 @@ const ListaProyecto = ({ setMostrarFooter }) => {
         {/*FORMULARIO (Usando los estilos de aside-proyectos) */}
           <Col md={4}>
           <aside className="aside-proyectos">
-            <FormularioProyecto handleAgregar={handleAgregar} />
+            <FormularioProyecto handleAgregar={handleAgregar} setProyectos={setProyectos} />
           </aside>
           </Col>
         </Row>

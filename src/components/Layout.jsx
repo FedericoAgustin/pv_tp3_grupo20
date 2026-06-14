@@ -7,11 +7,11 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Rutas from "./Rutas";
 import { Outlet } from "react-router-dom";
-import {UsuarioProvider} from '../context/UsuarioContext';
+import { ProveedorAutorizaciones } from "../context/AutorizacionesContext";
 const Layout = ({ mostrarFooter }) => {
   
   return (
-    <UsuarioProvider>
+    <ProveedorAutorizaciones>
     <div>
       <Header element={{ titulo: "Gestión de Proyectos Educativos" }} />
       <Nav />
@@ -24,7 +24,7 @@ const Layout = ({ mostrarFooter }) => {
         />
       )}
     </div>
-    </UsuarioProvider>
+    </ProveedorAutorizaciones>
   );
 };
 

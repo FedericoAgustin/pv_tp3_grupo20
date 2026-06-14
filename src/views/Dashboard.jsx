@@ -1,11 +1,15 @@
 import { Card, Col, Container, Row, Carousel, Badge, Image } from "react-bootstrap";
 import proyectoService from "../services/proyectoService";
 import { useEffect, useState } from "react";
+import Login from "../components/Login";
+import { useAutorizaciones } from "../hook/useAutorizaciones";
 
 const Dashboard = () => {
+  const { usuarioActivo } = useAutorizaciones();
   const [proyectos] = useState(proyectoService.obtenerProyectos());
   return (
     <Container className="py-4">
+      {!usuarioActivo && <Login />}
       {/*Card de descripción*/}
       <Row className="mt-4">
         <Col>
@@ -36,7 +40,7 @@ const Dashboard = () => {
               <Carousel interval={2000} indicators={true}>
                 {proyectos.map((proyecto) => (
                   <Carousel.Item key={proyecto.id}>
-                    <Image src={proyecto.imagen} alt={proyecto.titulo} />
+                    <Image src={proyecto.imagen} alt={proyecto.titulo} style={{ maxHeight: "200px", objectFit: "cover" }} fluid/>
                     <div className="d-flex justify-content-center align-items-center" style={{ height: "200px", padding: "2rem" }}>
                       <div className="text-center" style={{ color: "#2B231E" }}>
                         <h4 style={{ fontWeight: "bold" }}>{proyecto.titulo}</h4>
