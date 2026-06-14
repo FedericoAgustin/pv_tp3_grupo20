@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useContext } from "react";
 import { Card, Container, ListGroup, Form, Button } from "react-bootstrap";
-import { UsuarioContext } from "../context/UsuarioContext";
+import { useAutorizaciones } from "../hook/useAutorizaciones";
 
 const PerfilUsuario = () => {
-  const { usuario, actualizarPerfil } = useContext(UsuarioContext);
+  // const { usuario, actualizarPerfil } = useContext(UsuarioContext);
+  const { usuarioActivo, guardarSesion } = useAutorizaciones();
   const [modoEdicion, setModoEdicion] = useState(false);
-  const [formulario, setFormulario] = useState({ ...usuario });
+  const [formulario, setFormulario] = useState({ ...usuarioActivo });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,18 +15,18 @@ const PerfilUsuario = () => {
   };
 
   const handleEditar = () => {
-    setFormulario({ ...usuario });
+    setFormulario({ ...usuarioActivo });
     setModoEdicion(true);
   };
 
   const handleGuardar = (e) => {
     e.preventDefault();
-    actualizarPerfil(formulario);
+    guardarSesion(formulario);
     setModoEdicion(false);
   };
 
   const handleCancelar = () => {
-    setFormulario({ ...usuario });
+    setFormulario({ ...usuarioActivo });
     setModoEdicion(false);
   };
   return (
@@ -46,10 +47,14 @@ const PerfilUsuario = () => {
                   fontWeight: "bold",
                 }}
               >
-                {usuario.nombre.charAt(0)}
+                {usuarioActivo ? usuarioActivo.nombre.charAt(0) : 'U'}
               </div>
-              <h3 className="fw-bold mb-1">{usuario.nombre}</h3>
-              <p className="text-muted mb-0">{usuario.rol}</p>
+              <h3 className="fw-bold mb-1">
+                {usuarioActivo ? usuarioActivo.nombre : 'Nombre del Usuario'}
+              </h3>
+              <p className="text-muted mb-0">
+                {usuarioActivo ? usuarioActivo.rol : 'Rol del Usuario'}
+              </p>
             </div>
 
             {modoEdicion ? (
@@ -104,19 +109,19 @@ const PerfilUsuario = () => {
                 <ListGroup variant="flush">
                   <ListGroup.Item className="py-3">
                     <div className="text-muted small">Nombre</div>
-                    <div className="fw-semibold">{usuario.nombre}</div>
+                    <div className="fw-semibold">{usuarioActivo ? usuarioActivo.nombre : 'Nombre del Usuario'}</div>
                   </ListGroup.Item>
                   <ListGroup.Item className="py-3">
                     <div className="text-muted small">DNI</div>
-                    <div className="fw-semibold">{usuario.dni}</div>
+                    <div className="fw-semibold">{usuarioActivo ? usuarioActivo.dni : 'DNI del Usuario'}</div>
                   </ListGroup.Item>
                   <ListGroup.Item className="py-3">
                     <div className="text-muted small">Rol</div>
-                    <div className="fw-semibold">{usuario.rol}</div>
+                    <div className="fw-semibold">{usuarioActivo ? usuarioActivo.rol : 'Rol del Usuario'}</div>
                   </ListGroup.Item>
                   <ListGroup.Item className="py-3">
                     <div className="text-muted small">Institución</div>
-                    <div className="fw-semibold">{usuario.institucion}</div>
+                    <div className="fw-semibold">{usuarioActivo ? usuarioActivo.institucion : 'Institución del Usuario'}</div>
                   </ListGroup.Item>
                 </ListGroup>
                 <div className="text-center mt-4">

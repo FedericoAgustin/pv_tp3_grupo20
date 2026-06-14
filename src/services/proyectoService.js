@@ -48,37 +48,53 @@ const proyectoService = (() => {
         { id: 5, titulo: 'Tutoring Académico', categoria: 'mobile', estado: 'En curso', imagen: imagenCursos, equipo: 'Miguel Herrera', rol: 'Académico', descripcion: descripcionArreglo[4] },
     ];
 
-    const obtenerProyectos = () => [...proyectos];
+    const obtenerProyectos = () => {
+        const proyectosGuardados = localStorage.getItem("proyectos");
+        if (proyectosGuardados) {
+            return JSON.parse(proyectosGuardados);
+        }
+        localStorage.setItem("proyectos", JSON.stringify(proyectos));
+        return [...proyectos];
+        }
 
     const agregarProyecto = (proyecto) => {
+        const proyectosActuales = obtenerProyectos();
         const nuevoProyecto = {
             id: Date.now(),
             ...proyecto,
             imagen: imagenDefault
         };
 
-        proyectos.push(nuevoProyecto);
+        proyectosActuales.push(nuevoProyecto);
+        localStorage.setItem("proyectos", JSON.stringify(proyectosActuales));
     }
 
     const eliminarProyecto = (id) => {
-        proyectos = proyectos.filter(proyecto => proyecto.id !== id);
+        const proyectosActuales = obtenerProyectos();
+        const proyectosActualesActualizados = proyectosActuales.filter(proyecto => proyecto.id !== id);
+        localStorage.setItem("proyectos", JSON.stringify(proyectosActualesActualizados));
     };
 
     const buscarProyectos = (nombreProyecto) => {
-        const proyectoEncontrado = proyectos.filter(proyecto => proyecto.titulo.toLowerCase().includes(nombreProyecto.toLowerCase()));
+        const proyectosActuales = obtenerProyectos();
+        const proyectoEncontrado = proyectosActuales.filter(proyecto => proyecto.titulo.toLowerCase().includes(nombreProyecto.toLowerCase()));
         return proyectoEncontrado;
     }
     const obtenerProyectoPorId = (id) => {
-        const proyecto = proyectos.find(proyecto => proyecto.id === id);
+        const proyectosActuales = obtenerProyectos();
+        const proyecto = proyectosActuales.find(proyecto => proyecto.id === id);
         return proyecto;
     }
-
+    const listarProyectosOriginales = () => {
+        localStorage.setItem("proyectos", JSON.stringify(proyectos));
+    }
     return {
         obtenerProyectos,
         agregarProyecto,
         eliminarProyecto,
         buscarProyectos,
-        obtenerProyectoPorId
+        obtenerProyectoPorId,
+        listarProyectosOriginales
     };
 })()
 
